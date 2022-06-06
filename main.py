@@ -7,13 +7,15 @@ from tortoise import run_async
 
 from modules import config, database
 
-client = commands.Bot(auto_sync_commands=True, owner_ids=[640235175007223814, 942458332822786048],
-                      debug_guilds=[901356445541466153], command_prefix=config.get("DISCORD", "PREFIX"))
+client = commands.Bot(auto_sync_commands=True,
+                      command_prefix=config.get("DISCORD", "PREFIX"))
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+handler = logging.FileHandler(
+    filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter(
+    '%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
 
@@ -43,7 +45,6 @@ def cogList():
 
 
 @client.slash_command(
-    guild_ids=[901356445541466153],
     name="load",
     aliases=["l"])
 async def load(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogList())):
@@ -57,7 +58,6 @@ async def load(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogList
 
 
 @client.slash_command(
-    guild_ids=[901356445541466153],
     name="unload",
     aliases=["u"])
 async def unload(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogList())):
@@ -71,7 +71,6 @@ async def unload(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogLi
 
 
 @client.slash_command(
-    guild_ids=[901356445541466153],
     name="reload",
     aliases=["r"])
 async def reload(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogList())):
@@ -85,7 +84,6 @@ async def reload(ctx, cog: discord.Option(str, "Enter a cog name", choices=cogLi
 
 
 @client.slash_command(
-    guild_ids=[901356445541466153],
     name="reloadall",
     aliases=["rall"]
 )
